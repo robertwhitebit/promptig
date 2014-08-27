@@ -51,6 +51,7 @@ MergeConflictsColor=${Red}
 
 CherryPickingColor=${Blue}
 RebasingColor=${Blue}
+HeadDetachedFromColor=${Blue}
 
 UntrackedFilesColor=${Yellow}
 
@@ -101,6 +102,8 @@ function getGitColor() {
       printf ${RebasingColor}
     elif match "$GitStatus" 'You are currently cherry-picking commit'; then
       printf ${CherryPickingColor}
+    elif match "$GitStatus" 'HEAD detached from'; then
+      printf ${HeadDetachedFromColor}
 
     elif match "$GitStatus" 'nothing to commit'; then
       printf ${NothingToCommitColor}
@@ -127,8 +130,8 @@ function getGitText() {
       BranchName=${BASH_REMATCH[1]}
     elif match "${GitStatus}" 'On branch ([^[:space:]]*)'; then
       BranchName=${BASH_REMATCH[1]}
-    elif match "${GitStatus}" 'HEAD detached at ([^[:space:]]*)'; then
-      BranchName=${BASH_REMATCH[1]}
+    elif match "${GitStatus}" 'HEAD detached (at|from) ([^[:space:]]*)'; then
+      BranchName=${BASH_REMATCH[2]}
     fi
 
     local CommitsAhead
