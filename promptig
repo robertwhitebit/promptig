@@ -169,4 +169,4 @@ function getGitText() {
 }
 
 # Always remember to escape colors with \[ and \] (e.g /[${Color}/])
-PS1="\[${PromptColor}\]\w\[\$(getGitColor)\]\$(getGitText)\[${PromptColor}\]$ \[${InputColor}\]"
+PS1="\[${PromptColor}\]\w\[\$(getGitColor)\]\$(getGitText)\[${PromptColor}\]$\[${InputColor}\] "
