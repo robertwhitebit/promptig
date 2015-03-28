@@ -1,3 +1,4 @@
+#!/bin/bash
 # The MIT License (MIT)
 #
 # Copyright (c) 2014 Robert Painsi
@@ -61,7 +62,8 @@ BranchBehindSymbol='↓'
 
 MergeConflictsSymbol='⚡'
 
-UnstagedFilesSymbol='*'
+ChangesNotStagedSymbol='*'
+UntrackedFilesSymbol='+'
 
 # utils
 function gitStatus() {
@@ -70,6 +72,14 @@ function gitStatus() {
 
 function gitStatusShort() {
   printf "$(LANG=en git status --porcelain 2>/dev/null)"
+}
+
+function gitModifiedFiles() {
+    printf "$(LANG=en git ls-files --modified 2>/dev/null)"
+}
+
+function gitUntrackedFiles() {
+    printf "$(LANG=en git ls-files --others --exclude-standard 2>/dev/null)"
 }
 
 function match() {
@@ -120,6 +130,14 @@ function getGitColor() {
   fi
 }
 
+function getGitUnstagedColor() {
+  if [[ $(gitModifiedFiles) ]]; then
+    printf ${ChangesNotStagedColor}
+  else
+    printf ${UntrackedFilesColor}
+  fi
+}
+
 function getGitText() {
   local GitStatus=$(gitStatus)
   if [[ $GitStatus ]]; then
@@ -156,17 +174,17 @@ function getGitText() {
       BranchState=" ${MergeConflicts}${CommitsAhead}${CommitsBehind}"
     fi
 
-    if [[ $GitStatusShort ]]; then
-      local CommitState
-
-      if matchGrep "${GitStatusShort}" '^.[^[:space:]]'; then
-        CommitState=${UnstagedFilesSymbol}
-      fi
-    fi
-
     printf " [${BranchName}${BranchState}]${CommitState}"
   fi
 }
 
+function getGitUnstagedText() {
+  if [[ $(gitModifiedFiles) ]]; then
+    printf "${ChangesNotStagedSymbol}"
+  elif [[ $(gitUntrackedFiles) ]]; then
+    printf "${UntrackedFilesSymbol}"
+  fi
+}
+
 # Always remember to escape colors with \[ and \] (e.g /[${Color}/])
-PS1="\[${PromptColor}\]\w\[\$(getGitColor)\]\$(getGitText)\[${PromptColor}\]$\[${InputColor}\] "
+PS1="\[${PromptColor}\]\w\[\$(getGitColor)\]\$(getGitText)\[\$(getGitUnstagedColor)\]\$(getGitUnstagedText)\[${PromptColor}\]$\[${InputColor}\] "

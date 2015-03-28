@@ -20,9 +20,15 @@
 # LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM,
 # OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
 # SOFTWARE.
-source ../../promptig
+source git/git-testcase.sh
 
-function printPrompt() {
-  # No escaping of colors needed
-  printf "${PromptColor}~/promptig/test$(getGitColor)$(getGitText)$(getGitUnstagedColor)$(getGitUnstagedText)${PromptColor}$ ${ColorReset}"
-}
+echo '# Testing staged and untracked files'
+setUp
+
+echo 'Text' > file.txt
+git add file.txt &>/dev/null
+
+echo 'Untracked' > untracked.txt
+
+echo $(printPrompt)
+tearDown
