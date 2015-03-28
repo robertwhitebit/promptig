@@ -22,7 +22,7 @@
 # SOFTWARE.
 source git/git-testcase.sh
 
-echo '# Testing file to commit'
+echo '# Testing staged files'
 setUp
 
 echo 'Text' > file.txt
