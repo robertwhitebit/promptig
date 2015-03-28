@@ -24,5 +24,5 @@ source ../../promptig
 
 function printPrompt() {
   # No escaping of colors needed
-  printf "${Cyan}~/promptig/test$(getGitColor)$(getGitText)${Cyan}$ ${ColorReset}"
+  printf "${PromptColor}~/promptig/test$(getGitColor)$(getGitText)${PromptColor}$ ${ColorReset}"
 }
