@@ -27,4 +27,3 @@ echo '# Testing default output'
 cd ~
 
 echo $(printPrompt)
-echo ''

@@ -29,6 +29,4 @@ echo '[modified]' > README.md
 echo 'Text' > file.txt
 
 echo $(printPrompt)
-echo ''
-
 tearDown

@@ -36,6 +36,4 @@ git commit -am 'Conflict' &>/dev/null
 git rebase origin/master &>/dev/null
 
 echo $(printPrompt)
-echo ''
-
 tearDown

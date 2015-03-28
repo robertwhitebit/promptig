@@ -28,6 +28,4 @@ setUp
 echo 'Text' > file.txt
 
 echo $(printPrompt)
-echo ''
-
 tearDown

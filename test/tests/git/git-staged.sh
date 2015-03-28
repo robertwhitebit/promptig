@@ -29,6 +29,4 @@ echo 'Text' > file.txt
 git add file.txt &>/dev/null
 
 echo $(printPrompt)
-echo ''
-
 tearDown

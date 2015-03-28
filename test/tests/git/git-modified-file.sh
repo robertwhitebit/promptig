@@ -28,6 +28,4 @@ setUp
 echo '[modified]' > README.md
 
 echo $(printPrompt)
-echo ''
-
 tearDown

@@ -28,6 +28,4 @@ setUp
 git checkout @~1 &>/dev/null
 
 echo $(printPrompt)
-echo ''
-
 tearDown

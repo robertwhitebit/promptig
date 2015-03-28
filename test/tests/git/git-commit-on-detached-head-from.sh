@@ -30,6 +30,4 @@ echo 'Modify readme' > README.md
 git commit -am 'Modified readme' &>/dev/null
 
 echo $(printPrompt)
-echo ''
-
 tearDown

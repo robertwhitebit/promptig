@@ -28,6 +28,4 @@ setUp
 git checkout origin/master &>/dev/null
 
 echo $(printPrompt)
-echo ''
-
 tearDown

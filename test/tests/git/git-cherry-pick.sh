@@ -37,6 +37,4 @@ git commit -am 'New change' &>/dev/null
 git cherry-pick master..newBranch &>/dev/null
 
 echo $(printPrompt)
-echo ''
-
 tearDown

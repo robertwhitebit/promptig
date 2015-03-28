@@ -40,6 +40,4 @@ git add file.txt &>/dev/null
 git commit -m 'Add file' &>/dev/null
 
 echo $(printPrompt)
-echo ''
-
 tearDown

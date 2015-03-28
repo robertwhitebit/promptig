@@ -33,6 +33,4 @@ git push origin master &>/dev/null
 git reset --hard @~1 &>/dev/null
 
 echo $(printPrompt)
-echo ''
-
 tearDown

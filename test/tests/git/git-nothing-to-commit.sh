@@ -26,6 +26,4 @@ echo '# Testing nothing to commit'
 setUp
 
 echo $(printPrompt)
-echo ''
-
 tearDown

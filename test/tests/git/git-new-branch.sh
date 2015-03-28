@@ -28,6 +28,4 @@ setUp
 git checkout -b newBranch &>/dev/null
 
 echo $(printPrompt)
-echo ''
-
 tearDown
