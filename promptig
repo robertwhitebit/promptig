@@ -67,7 +67,7 @@ UntrackedFilesSymbol='+'
 
 # utils
 function gitStatus() {
-  printf "$(LANG=en git status 2>/dev/null)"
+  printf "$(LANG=en git status --long 2>/dev/null)"
 }
 
 function gitStatusShort() {
