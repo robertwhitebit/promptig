@@ -66,19 +66,19 @@ ChangesNotStagedSymbol='*'
 UntrackedFilesSymbol='+'
 
 # utils
-function gitStatus() {
+function _git_status() {
   printf "$(LANG=en git status --long 2>/dev/null)"
 }
 
-function gitStatusShort() {
+function _git_status_short() {
   printf "$(LANG=en git status --porcelain 2>/dev/null)"
 }
 
-function gitModifiedFiles() {
+function _git_modified_files() {
     printf "$(LANG=en git ls-files --modified 2>/dev/null)"
 }
 
-function gitUntrackedFiles() {
+function _git_untracked_files() {
     printf "$(LANG=en git ls-files --others --exclude-standard 2>/dev/null)"
 }
 
@@ -106,7 +106,7 @@ function countLines() {
 SOURCE_DIR="$( cd "$( dirname "${BASH_SOURCE[0]}" )" && pwd )"
 
 function getGitColor() {
-  local GitStatus=$(gitStatus)
+  local GitStatus=$(_git_status)
   if [[ $GitStatus ]]; then
     if match "$GitStatus" 'You are currently rebasing branch'; then
       printf ${RebasingColor}
@@ -131,7 +131,7 @@ function getGitColor() {
 }
 
 function getGitUnstagedColor() {
-  if [[ $(gitModifiedFiles) ]]; then
+  if [[ $(_git_modified_files) ]]; then
     printf ${ChangesNotStagedColor}
   else
     printf ${UntrackedFilesColor}
@@ -139,9 +139,9 @@ function getGitUnstagedColor() {
 }
 
 function getGitText() {
-  local GitStatus=$(gitStatus)
+  local GitStatus=$(_git_status)
   if [[ $GitStatus ]]; then
-    local GitStatusShort=$(gitStatusShort)
+    local GitStatusShort=$(_git_status_short)
 
     local BranchName
     if match "${GitStatus}" 'rebase in progress; onto ([^[:space:]]*)'; then
@@ -179,9 +179,9 @@ function getGitText() {
 }
 
 function getGitUnstagedText() {
-  if [[ $(gitModifiedFiles) ]]; then
+  if [[ $(_git_modified_files) ]]; then
     printf "${ChangesNotStagedSymbol}"
-  elif [[ $(gitUntrackedFiles) ]]; then
+  elif [[ $(_git_untracked_files) ]]; then
     printf "${UntrackedFilesSymbol}"
   fi
 }
